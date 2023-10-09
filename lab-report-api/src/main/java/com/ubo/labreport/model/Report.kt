@@ -1,8 +1,6 @@
 package com.ubo.labreport.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
+import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDateTime
 
@@ -18,7 +16,11 @@ data class Report(
     val identityNumber: String,
     val diagnosis: String,
     val diagnosisDetails: String,
-    val givenDate: LocalDateTime
+    val givenDate: LocalDateTime,
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @JoinColumn(name = "laborant_id", nullable = false)
+    val laborant: Laborant?
 
 ) {
 
@@ -30,7 +32,8 @@ data class Report(
             identityNumber = identityNumber,
             diagnosis = diagnosis,
             diagnosisDetails = diagnosisDetails,
-            LocalDateTime.now()
+            LocalDateTime.now(),
+            null
         )
 }
 

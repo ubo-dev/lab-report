@@ -41,4 +41,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(LaborantNotFoundException.class)
+    public ResponseEntity<?> handleReportNotFoundException(LaborantNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
+    }
+
 }
