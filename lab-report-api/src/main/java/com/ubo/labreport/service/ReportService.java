@@ -63,4 +63,16 @@ public class ReportService {
         return converter.convert(report);
     }
 
+    public List<ReportDto> getAllReportByGivenDate() {
+        return converter.convertList(reportRepository.getAllOrderedByDateDesc());
+    }
+
+    public ReportDto getReportByPatientName(String firstName, String lastName) {
+        return converter.convert(reportRepository.getReportByPatientFirstNameAndPatientLastName(firstName,lastName));
+    }
+
+    public ReportDto getReportByIdentityNumber(String id) {
+        return converter.convert(reportRepository.getReportByIdentityNumber(id));
+    }
+
 }

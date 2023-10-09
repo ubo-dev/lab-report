@@ -34,13 +34,30 @@ public class ReportController {
         return ResponseEntity.ok(reportService.getReportById(id));
     }
 
+    @GetMapping("/getAllByDate")
+    public ResponseEntity<List<ReportDto>> getAllByDate() {
+        return ResponseEntity.ok(reportService.getAllReportByGivenDate());
+
+    }
+    @GetMapping("/getAllByIdentityNumber/{id}")
+    public ResponseEntity<ReportDto> getAllByIdentityNumber(@PathVariable String id) {
+        return ResponseEntity.ok(reportService.getReportByIdentityNumber(id));
+    }
+
+    @GetMapping("/{firstName}-{lastName}")
+    public ResponseEntity<ReportDto> getReportByPatientName(@PathVariable String firstName,
+                                                            @PathVariable String lastName) {
+        return ResponseEntity.ok(reportService.getReportByPatientName(firstName,lastName));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<ReportDto> deleteReportById(@PathVariable String id) {
         return ResponseEntity.ok(reportService.deleteReport(id));
     }
 
     @PutMapping("/updateReport/{id}")
-    public ResponseEntity<ReportDto> updateReportById(@PathVariable String id, @RequestBody @Valid ReportRequest request) {
+    public ResponseEntity<ReportDto> updateReportById(@PathVariable String id,
+                                                      @RequestBody @Valid ReportRequest request) {
         return ResponseEntity.ok(reportService.updateReport(id,request));
     }
 
