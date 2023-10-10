@@ -1,8 +1,45 @@
+import { useNavigate } from "react-router-dom";
+import Report from "./Report";
+import React, { useEffect, useState } from "react";
+import ReportService from "../services/ReportService";
+
 const ReportList = () => {
+  const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+  const [report, setReport] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await ReportService.getReports();
+        setReport(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  const deleteReport = (e, id) => {
+    e.preventDefault();
+    ReportService.deleteReport(id).then((response) => {
+      if (report) {
+        setReport((prevElement) => {
+          return prevElement.filter((element) => element.id !== id);
+        });
+      }
+    });
+  };
   return (
     <div className="container mx-auto my-4">
       <div className="h-12">
-        <button className="rounded bg-slate-600 text-white px-6 py-2">
+        <button
+          onClick={() => navigate("/report/add")}
+          className="rounded bg-slate-600 text-white px-6 py-2"
+        >
           {" "}
           Add Report{" "}
         </button>
@@ -37,6 +74,17 @@ const ReportList = () => {
               </th>
             </tr>
           </thead>
+          {!loading && (
+            <tbody className="bg-white">
+              {report.map((report) => (
+                <Report
+                  report={report}
+                  deleteReport={deleteReport}
+                  key={report.id}
+                ></Report>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </div>
