@@ -47,12 +47,12 @@ public class ReportService {
     }
 
     public ReportDto updateReport(String id, ReportRequest request) {
-        ReportDto report = getReportById(id);
         return converter.convert(reportRepository.save(new Report(
-                report.id(),
+                id,
                 request.patientFirstName(),
                 request.patientLastName(),
                 request.identityNumber(),
+                request.diagnosis(),
                 request.diagnosisDetails()
         )));
     }
@@ -65,7 +65,7 @@ public class ReportService {
     }
 
     public List<ReportDto> getAllReportByGivenDate() {
-        return converter.convertList(reportRepository.getAllOrderedByDateDesc());
+        return converter.convertList(reportRepository.findAllByOrderByGivenDateDesc());
     }
 
     public ReportDto getReportByPatientName(String firstName, String lastName) {

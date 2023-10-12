@@ -23,6 +23,13 @@ const ReportService = {
       responseType: "json",
     });
   },
+  getReportsOrderedByDate() {
+    return axios({
+      method: "get",
+      url: REPORT_BASE_URL + "/getAllByDate",
+      responseType: "json",
+    });
+  },
   deleteReport(id,report,setReport) {
     axios
       .delete(REPORT_BASE_URL + `/${id}`)
@@ -39,13 +46,14 @@ const ReportService = {
       });
   },
   getReportById(id) {
-    return axios({ method: "get", url: REPORT_BASE_URL + "/", id });
+    return axios({ method: "get", url: REPORT_BASE_URL  + `/${id}`});
   },
   updateReport(id, report) {
+    console.log(report)
     return axios({
       method: "put",
-      url: REPORT_BASE_URL + "/" + id + "/",
-      report,
+      url: REPORT_BASE_URL + `/updateReport/${id}`,
+      data: report
     });
   },
 };

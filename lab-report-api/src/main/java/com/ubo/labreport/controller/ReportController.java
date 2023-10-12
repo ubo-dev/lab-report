@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/v1/report")
-@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
+@CrossOrigin(origins = "*",originPatterns = "*/*", allowedHeaders = "*", maxAge = 3600)
 public class ReportController {
 
     private final ReportService reportService;

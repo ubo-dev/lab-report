@@ -24,9 +24,9 @@ data class Report(
 
 ) {
 
-    constructor(patientFirstName: String,patientLastName: String,identityNumber: String,diagnosis: String,
+    constructor(id: String,patientFirstName: String,patientLastName: String,identityNumber: String,diagnosis: String,
         diagnosisDetails: String) : this(
-            "",
+            id = id,
             patientFirstName = patientFirstName,
             patientLastName = patientLastName,
             identityNumber = identityNumber,
@@ -35,5 +35,17 @@ data class Report(
             LocalDateTime.now(),
             null
         )
+
+    constructor(patientFirstName: String,patientLastName: String,identityNumber: String,diagnosis: String,
+                diagnosisDetails: String) : this(
+        "",
+        patientFirstName = patientFirstName,
+        patientLastName = patientLastName,
+        identityNumber = identityNumber,
+        diagnosis = diagnosis,
+        diagnosisDetails = diagnosisDetails,
+        LocalDateTime.now(),
+        null
+    )
 }
 

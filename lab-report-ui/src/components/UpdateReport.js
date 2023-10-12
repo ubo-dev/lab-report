@@ -11,9 +11,8 @@ const UpdateReport = () => {
     patientLastName: "",
     identityNumber: "",
     diagnosis: "",
-    diagnosisDetails: ""
+    diagnosisDetails: "",
   });
-
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -25,6 +24,7 @@ const UpdateReport = () => {
       try {
         const response = await ReportService.getReportById(report.id);
         setReport(response.data);
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -34,6 +34,7 @@ const UpdateReport = () => {
 
   const updateReport = (e) => {
     e.preventDefault();
+    console.log(report);
     ReportService.updateReport(id, report)
       .then((response) => {
         navigate("/report/all");

@@ -12,10 +12,7 @@ import java.util.List;
 @Qualifier("report")
 public interface ReportRepository extends JpaRepository<Report, String> {
 
-
-    @Query("from Report r order by :givenDate desc")
-    List<Report> getAllOrderedByDateDesc();
-
+    List<Report> findAllByOrderByGivenDateDesc();
     Report getReportByPatientFirstNameAndPatientLastName(String firstName, String lastName);
     Report getReportByIdentityNumber(String identityNumber);
 }
