@@ -63,12 +63,6 @@ const ReportList = () => {
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Diagnosis Details
               </th>
-              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Given Date
-              </th>
-              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Document Photo
-              </th>
               <th className="text-right font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Actions
               </th>

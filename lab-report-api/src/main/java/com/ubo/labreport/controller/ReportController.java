@@ -4,13 +4,16 @@ import com.ubo.labreport.dto.ReportDto;
 import com.ubo.labreport.dto.ReportRequest;
 import com.ubo.labreport.service.ReportService;
 import jakarta.validation.Valid;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/v1/report")
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 public class ReportController {
 
     private final ReportService reportService;
@@ -21,6 +24,8 @@ public class ReportController {
 
     @PostMapping()
     public ResponseEntity<ReportDto> createReport(@RequestBody @Valid ReportRequest request) {
+        System.out.println("request recieved");
+        System.out.println(request);
         return ResponseEntity.ok(reportService.createReport(request));
     }
 

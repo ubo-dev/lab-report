@@ -7,13 +7,11 @@ const UpdateReport = () => {
   const navigate = useNavigate();
   const [report, setReport] = useState({
     id: id,
-    firstName: "",
-    lastName: "",
+    patientFirstName: "",
+    patientLastName: "",
     identityNumber: "",
     diagnosis: "",
-    diagnosisDetails: "",
-    givenDate: "",
-    documentPhoto: ""
+    diagnosisDetails: ""
   });
 
 
@@ -57,8 +55,8 @@ const UpdateReport = () => {
           </label>
           <input
             type="text"
-            name="firstName"
-            value={report.firstName}
+            name="patientFirstName"
+            value={report.patientFirstName}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
@@ -69,8 +67,8 @@ const UpdateReport = () => {
           </label>
           <input
             type="text"
-            name="lastName"
-            value={report.lastName}
+            name="patientLastName"
+            value={report.patientLastName}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>
@@ -107,30 +105,6 @@ const UpdateReport = () => {
             type="text"
             name="diagnosisDetails"
             value={report.diagnosisDetails}
-            onChange={(e) => handleChange(e)}
-            className="h-10 w-96 border mt-2 px-2 py-2"
-          ></input>
-        </div>
-        <div className="items-center justify-center h-14 w-full my-4">
-          <label className="block text-gray-600 text-sm font-normal">
-            Given Date
-          </label>
-          <input
-            type="text"
-            name="givenDate"
-            value={report.givenDate}
-            onChange={(e) => handleChange(e)}
-            className="h-10 w-96 border mt-2 px-2 py-2"
-          ></input>
-        </div>
-        <div className="items-center justify-center h-14 w-full my-4">
-          <label className="block text-gray-600 text-sm font-normal">
-            Document Photo
-          </label>
-          <input
-            type="text"
-            name="documentPhoto"
-            value={report.documentPhoto}
             onChange={(e) => handleChange(e)}
             className="h-10 w-96 border mt-2 px-2 py-2"
           ></input>

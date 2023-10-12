@@ -5,7 +5,8 @@ const REPORT_BASE_URL = "http://localhost:8080/v1/report"
 const ReportService = {
 
     saveReport(report) {
-        return axios.post(REPORT_BASE_URL + "/", {report})
+        console.log(report)
+        return axios.post(REPORT_BASE_URL, {report})
     },
     getReports() {
         return axios.get(REPORT_BASE_URL)
