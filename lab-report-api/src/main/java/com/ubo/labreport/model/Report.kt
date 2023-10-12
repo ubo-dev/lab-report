@@ -19,7 +19,7 @@ data class Report(
     val givenDate: LocalDateTime,
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "laborant_id", nullable = false)
+    @JoinColumn(name = "laborant_id", nullable = true)
     val laborant: Laborant?
 
 ) {

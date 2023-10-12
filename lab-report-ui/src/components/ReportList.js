@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Report from "./Report";
-import React, { useEffect, useState } from "react";
 import ReportService from "../services/ReportService";
 
 const ReportList = () => {
@@ -25,13 +25,7 @@ const ReportList = () => {
 
   const deleteReport = (e, id) => {
     e.preventDefault();
-    ReportService.deleteReport(id).then((response) => {
-      if (report) {
-        setReport((prevElement) => {
-          return prevElement.filter((element) => element.id !== id);
-        });
-      }
-    });
+    ReportService.deleteReport(id,report,setReport);
   };
   return (
     <div className="container mx-auto my-4">
@@ -62,6 +56,12 @@ const ReportList = () => {
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Diagnosis Details
+              </th>
+              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
+                Given Date
+              </th>
+              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
+                Document Photo
               </th>
               <th className="text-right font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Actions

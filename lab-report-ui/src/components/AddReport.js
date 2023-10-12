@@ -23,13 +23,13 @@ const AddReport = () => {
     console.log(report);
     ReportService.saveReport(report)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         navigate("/report/all");
-        return response;
+          // Handle data
       })
       .catch((error) => {
         console.log(error);
-      });
+      })
   };
 
   const reset = (e) => {

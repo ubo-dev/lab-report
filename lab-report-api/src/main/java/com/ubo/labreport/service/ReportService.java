@@ -25,8 +25,8 @@ public class ReportService {
 
     public ReportDto createReport(ReportRequest request) {
         return converter.convert(reportRepository.save(new Report(
-                request.firstName(),
-                request.lastName(),
+                request.patientFirstName(),
+                request.patientLastName(),
                 request.identityNumber(),
                 request.diagnosis(),
                 request.diagnosisDetails()
@@ -50,8 +50,8 @@ public class ReportService {
         ReportDto report = getReportById(id);
         return converter.convert(reportRepository.save(new Report(
                 report.id(),
-                request.firstName(),
-                request.lastName(),
+                request.patientFirstName(),
+                request.patientLastName(),
                 request.identityNumber(),
                 request.diagnosisDetails()
         )));

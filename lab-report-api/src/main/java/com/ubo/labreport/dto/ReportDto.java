@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 
 public record ReportDto(
         String id,
-        String firstName,
-        String lastName,
+        String patientFirstName,
+        String patientLastName,
         String identityNumber,
         String diagnosis,
         String diagnosisDetails,

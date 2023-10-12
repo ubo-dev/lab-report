@@ -10,7 +10,7 @@ const Report = ({ report, deleteReport }) => {
   return (
     <tr key={report.id}>
       <td className="text-left px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-500">{report.patietnFirstName}</div>
+        <div className="text-sm text-gray-500">{report.patientFirstName}</div>
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">{report.patientLastName}</div>
@@ -23,6 +23,12 @@ const Report = ({ report, deleteReport }) => {
       </td>
       <td className="text-left px-6 py-4 whitespace-nowrap">
         <div className="text-sm text-gray-500">{report.diagnosisDetails}</div>
+      </td>
+      <td className="text-left px-6 py-4 whitespace-nowrap">
+        <div className="text-sm text-gray-500">{report.givenDate}</div>
+      </td>
+      <td className="text-left px-6 py-4 whitespace-nowrap">
+        <div className="text-sm text-gray-500">{report.documentPhoto}</div>
       </td>
       <td className="text-right px-6 py-4 whitespace-nowrap font-medium text-sm">
         <a
