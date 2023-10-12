@@ -5,6 +5,7 @@ import com.ubo.labreport.dto.LaborantRequest;
 import com.ubo.labreport.dto.converter.LaborantDtoConverter;
 import com.ubo.labreport.model.Laborant;
 import com.ubo.labreport.repository.LaborantRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +17,9 @@ public class LaborantService {
     private final LaborantDtoConverter converter;
 
 
-    public LaborantService(LaborantRepository laborantRepository, LaborantDtoConverter laborantDtoConverter) {
+    public LaborantService(@Qualifier("laborant") LaborantRepository laborantRepository, LaborantDtoConverter laborantDtoConverter) {
         this.laborantRepository = laborantRepository;
-        this. converter = laborantDtoConverter;
+        this.converter = laborantDtoConverter;
     }
 
     public LaborantDto createLaborant(LaborantRequest request) {

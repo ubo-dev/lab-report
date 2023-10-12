@@ -6,6 +6,7 @@ import com.ubo.labreport.dto.converter.ReportDtoConverter;
 import com.ubo.labreport.exception.ReportNotFoundException;
 import com.ubo.labreport.model.Report;
 import com.ubo.labreport.repository.ReportRepository;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final ReportDtoConverter converter;
 
-    public ReportService(ReportRepository reportRepository, ReportDtoConverter reportDtoConverter) {
+    public ReportService(@Qualifier("report") ReportRepository reportRepository, ReportDtoConverter reportDtoConverter) {
         this.reportRepository = reportRepository;
         this.converter = reportDtoConverter;
     }
