@@ -1,55 +1,43 @@
 package com.ubo.labreport.model
 
 import com.ubo.labreport.enums.Role
-import jakarta.persistence.*
-import jakarta.validation.constraints.Size
+import jakarta.persistence.Entity
+import jakarta.persistence.Enumerated
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.Id
 import org.hibernate.annotations.GenericGenerator
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
-data class Laborant(
+data class User(
+
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     val id: String,
     val firstName: String,
     val lastName: String,
-
-    @Size(min = 7, max = 7, message = "Hospital ID must be 7 digits long")
-    val hospitalId: String,
-
-    @OneToMany(mappedBy = "laborant", fetch = FetchType.EAGER)
-    val reports: List<Report>?,
+    val email: String,
+    val password: String,
 
     @Enumerated
-    val role: Role?
+    val role: Role
 
-) : UserDetails
-
-{
-    constructor(firstName: String, lastName: String, hospitalId: String) : this(
-        "",
-        firstName = firstName,
-        lastName = lastName,
-        hospitalId = hospitalId,
-        null,
-        null
-    )
-
+) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         val authorities = ArrayList<SimpleGrantedAuthority>();
-        authorities.add(SimpleGrantedAuthority(role?.name));
+        authorities.add(SimpleGrantedAuthority(role.name))
         return authorities;
     }
 
     override fun getPassword(): String {
-        TODO("Not yet implemented")
+        return password;
     }
 
     override fun getUsername(): String {
-        return firstName + lastName;
+        return email;
     }
 
     override fun isAccountNonExpired(): Boolean {
@@ -67,6 +55,5 @@ data class Laborant(
     override fun isEnabled(): Boolean {
         return true;
     }
+
 }
-
-

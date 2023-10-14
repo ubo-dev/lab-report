@@ -9,7 +9,6 @@ public record LaborantDto(
         String firstName,
         String lastName,
         String hospitalId,
-
         List<Report> reports
 ) {
 }

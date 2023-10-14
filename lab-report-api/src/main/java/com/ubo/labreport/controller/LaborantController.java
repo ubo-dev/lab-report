@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/laborant")
+@CrossOrigin(origins = "*",originPatterns = "*/*", allowedHeaders = "*", maxAge = 3600)
 public class LaborantController {
 
     private final LaborantService laborantService;
@@ -32,6 +33,11 @@ public class LaborantController {
     @GetMapping()
     public ResponseEntity<List<LaborantDto>> getAllLaborant() {
         return ResponseEntity.ok(laborantService.getAllLaborant());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LaborantDto> getLaborantById(@PathVariable String id) {
+        return ResponseEntity.ok(laborantService.getLaborantById(id));
     }
 
 }
