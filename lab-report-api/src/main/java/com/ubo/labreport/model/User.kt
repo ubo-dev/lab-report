@@ -20,12 +20,23 @@ data class User(
     val firstName: String,
     val lastName: String,
     val email: String,
-    val password: String,
+    private val password: String,
 
     @Enumerated
     val role: Role
 
 ) : UserDetails {
+    constructor(firstName: String, lastName: String, email: String, password: String) : this(
+        "",
+        firstName = firstName,
+        lastName = lastName,
+        email = email,
+        password = password,
+        Role.USER
+    ) {
+
+    }
+
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         val authorities = ArrayList<SimpleGrantedAuthority>();
         authorities.add(SimpleGrantedAuthority(role.name))
