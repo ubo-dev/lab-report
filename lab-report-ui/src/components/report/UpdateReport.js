@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import ReportService from "../services/ReportService";
+import ReportService from "../../services/ReportService";
 
 const UpdateReport = () => {
   const { id } = useParams();

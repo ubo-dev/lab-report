@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Report from "./Report";
-import ReportService from "../services/ReportService";
+import ReportService from "../../services/ReportService";
 
 const ReportList = () => {
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [report, setReport] = useState(null);
+  const [navLaborant, setNavLaborant] = useState(false);
+  const [navAdd, setNavAdd] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,16 +44,48 @@ const ReportList = () => {
     });
     console.log(ReportService.getReportsOrderedByDate());
   };
+
+  useEffect( () => {
+    if(navLaborant) {
+        navigate("/laborant/all")
+    }
+
+    if(navAdd) {
+      navigate("/report/add")
+    }
+    setNavLaborant(false);
+    setNavAdd(false);
+
+  })
+
+  const handleNavigate = () => {
+    setNavLaborant(true);
+  };
+
+  const handleNavigateAdd = () => {
+    setNavAdd(true);
+  };
+
   return (
     <div className="container mx-auto my-4">
       <div className="flex justify-between">
         <div className="h-12">
           <button
-            onClick={() => navigate("/report/add")}
+            onClick={handleNavigateAdd}
             className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
           >
             <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-700 rounded-md group-hover:bg-opacity-0">
               Add Report{" "}
+            </span>
+          </button>
+        </div>
+        <div className="h-12">
+          <button
+            onClick={handleNavigate}
+            className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+          >
+            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-700 rounded-md group-hover:bg-opacity-0">
+              Laborants{" "}
             </span>
           </button>
         </div>
@@ -83,13 +117,7 @@ const ReportList = () => {
                 Diagnosis
               </th>
               <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Diagnosis Details
-              </th>
-              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Given Date
-              </th>
-              <th className="text-left font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
-                Document Photo
               </th>
               <th className="text-right font-medium text-gray-500 uppercase tracking-wider py-3 px-6">
                 Actions
