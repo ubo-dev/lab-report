@@ -63,7 +63,7 @@ JUnit test coverage is 100% as well as integration tests are available.
 - JUnit 5
 - JWT
 
-- I preffered to use Kotlin data classes as my entity classes instead of using Project Lombok to get rid of boilerplate code. Lombok creates unnecessary dependency and create some immutabaility problems. While Kotlin data classes provides the ability to don't write boilerplate code, it also works full compatible with Java and Spring since its runs on JVM, too. I also used Java Records as DTOs(data transfer objects) to sustain immutability.
+- I preffered to use Kotlin data classes as my entity classes instead of using Project Lombok to get rid of boilerplate code. Lombok creates unnecessary dependency and create some immutability problems. While Kotlin data classes provides the ability to don't write boilerplate code, it also works full compatible with Java and Spring since its runs on JVM, too. I also used Java Records as DTOs(data transfer objects) to sustain immutability.
 
 ### Prerequisites
 
