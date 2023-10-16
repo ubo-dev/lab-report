@@ -78,9 +78,9 @@ There are 2 ways of run & build the application.
 
 #### Docker Compose
 
-For docker compose usage, docker images already push to docker.io
+For docker compose usage, docker images already pushed to docker.io.
 
-You just need to run `docker-compose up` command
+You just need to run `docker-compose up` command.
 ___
 *$PORT: 8080*
 ```ssh
