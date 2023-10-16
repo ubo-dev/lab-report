@@ -25,6 +25,9 @@ The application has 3 API's;
 * UserAPI
 
 ```html
+POST /v1/auth/register - registration
+POST /v1/auth/authenticate - authentication
+
 POST /v1/laborant - creates new laborant
 GET /v1/laborant/{laborantId} - retrieves a laborant by id
 GET /v1/laborant - retrieves all laborants
