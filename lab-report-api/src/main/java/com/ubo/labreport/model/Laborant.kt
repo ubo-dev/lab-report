@@ -23,50 +23,17 @@ data class Laborant(
     @OneToMany(mappedBy = "laborant", fetch = FetchType.EAGER)
     val reports: List<Report>?,
 
-    @Enumerated
-    val role: Role?
 
-) : UserDetails
-
-{
+) {
     constructor(firstName: String, lastName: String, hospitalId: String) : this(
         "",
         firstName = firstName,
         lastName = lastName,
         hospitalId = hospitalId,
         null,
-        null
     )
 
-    override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        val authorities = ArrayList<SimpleGrantedAuthority>();
-        authorities.add(SimpleGrantedAuthority(role?.name));
-        return authorities;
-    }
 
-    override fun getPassword(): String {
-        TODO("Not yet implemented")
-    }
-
-    override fun getUsername(): String {
-        return firstName + lastName;
-    }
-
-    override fun isAccountNonExpired(): Boolean {
-        return true;
-    }
-
-    override fun isAccountNonLocked(): Boolean {
-        return true;
-    }
-
-    override fun isCredentialsNonExpired(): Boolean {
-        return true;
-    }
-
-    override fun isEnabled(): Boolean {
-        return true;
-    }
 }
 
 

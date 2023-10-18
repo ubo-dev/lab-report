@@ -5,5 +5,8 @@ public record ReportRequest(
         String patientLastName,
         String identityNumber,
         String diagnosis,
-        String diagnosisDetails){
+        String diagnosisDetails,
+
+        LaborantRequest laborant
+){
 }

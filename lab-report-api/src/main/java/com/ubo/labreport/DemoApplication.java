@@ -24,6 +24,7 @@ public class DemoApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/v1/report").allowedOrigins("http://localhost:8080");
+				registry.addMapping("/v1/laborant").allowedOrigins("http://localhost:8080");
 			}
 		};
 	}

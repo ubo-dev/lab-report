@@ -5,7 +5,9 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Enumerated
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
+import jakarta.validation.constraints.NotBlank
 import org.hibernate.annotations.GenericGenerator
+import org.jetbrains.annotations.NotNull
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -26,13 +28,13 @@ data class User(
     val role: Role
 
 ) : UserDetails {
-    constructor(firstName: String, lastName: String, email: String, password: String) : this(
+    constructor(firstName: String, lastName: String, email: String, password: String,role: Role) : this(
         "",
         firstName = firstName,
         lastName = lastName,
         email = email,
         password = password,
-        Role.USER
+        role = role
     ) {
 
     }

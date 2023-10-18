@@ -2,8 +2,10 @@ package com.ubo.labreport.service;
 
 import com.ubo.labreport.dto.ReportDto;
 import com.ubo.labreport.dto.ReportRequest;
+import com.ubo.labreport.dto.converter.LaborantDtoConverter;
 import com.ubo.labreport.dto.converter.ReportDtoConverter;
 import com.ubo.labreport.exception.ReportNotFoundException;
+import com.ubo.labreport.model.Laborant;
 import com.ubo.labreport.model.Report;
 import com.ubo.labreport.repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +19,8 @@ public class ReportService {
     private final ReportRepository reportRepository;
     private final ReportDtoConverter converter;
 
-    public ReportService(@Qualifier("report") ReportRepository reportRepository, ReportDtoConverter reportDtoConverter) {
+    public ReportService(@Qualifier("report") ReportRepository reportRepository,
+                         ReportDtoConverter reportDtoConverter) {
         this.reportRepository = reportRepository;
         this.converter = reportDtoConverter;
     }
@@ -29,7 +32,12 @@ public class ReportService {
                 request.patientLastName(),
                 request.identityNumber(),
                 request.diagnosis(),
-                request.diagnosisDetails()
+                request.diagnosisDetails(),
+                new Laborant(
+                        request.laborant().firstName(),
+                        request.laborant().lastName(),
+                        request.laborant().hospitalId()
+                )
         )));
     }
 
@@ -53,7 +61,12 @@ public class ReportService {
                 request.patientLastName(),
                 request.identityNumber(),
                 request.diagnosis(),
-                request.diagnosisDetails()
+                request.diagnosisDetails(),
+                new Laborant(
+                        request.laborant().firstName(),
+                        request.laborant().lastName(),
+                        request.laborant().hospitalId()
+                )
         )));
     }
 

@@ -13,10 +13,11 @@ services:
     ports:
       - "3306:3306"
 
-  app:
-    image: 'lab-report-api:latest'
-    build:
-      context: .
-    container_name: lab-report-api
-    ports:
-      - "9090:8080"
+
+#  app:
+#    image: 'lab-report-api:latest'
+#    build:
+#      context: .
+#    container_name: lab-report-api
+#    ports:
+ #     - "9090:8080"

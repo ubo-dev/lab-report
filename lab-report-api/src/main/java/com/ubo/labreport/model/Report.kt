@@ -19,25 +19,14 @@ data class Report(
     val givenDate: LocalDateTime,
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-    @JoinColumn(name = "laborant_id", nullable = true)
-    val laborant: Laborant?
+    @JoinColumn(name = "laborant_id", nullable = false)
+    val laborant: Laborant
 
 ) {
 
-    constructor(id: String,patientFirstName: String,patientLastName: String,identityNumber: String,diagnosis: String,
-        diagnosisDetails: String) : this(
-            id = id,
-            patientFirstName = patientFirstName,
-            patientLastName = patientLastName,
-            identityNumber = identityNumber,
-            diagnosis = diagnosis,
-            diagnosisDetails = diagnosisDetails,
-            LocalDateTime.now(),
-            null
-        )
 
     constructor(patientFirstName: String,patientLastName: String,identityNumber: String,diagnosis: String,
-                diagnosisDetails: String) : this(
+                diagnosisDetails: String,laborant: Laborant) : this(
         "",
         patientFirstName = patientFirstName,
         patientLastName = patientLastName,
@@ -45,7 +34,21 @@ data class Report(
         diagnosis = diagnosis,
         diagnosisDetails = diagnosisDetails,
         LocalDateTime.now(),
-        null
+        laborant = laborant
     )
+
+    constructor(id: String,patientFirstName: String,patientLastName: String,identityNumber: String,diagnosis: String,
+                diagnosisDetails: String,laborant: Laborant) : this(
+        "",
+        patientFirstName = patientFirstName,
+        patientLastName = patientLastName,
+        identityNumber = identityNumber,
+        diagnosis = diagnosis,
+        diagnosisDetails = diagnosisDetails,
+        LocalDateTime.now(),
+        laborant = laborant
+    )
+
+
 }
 
