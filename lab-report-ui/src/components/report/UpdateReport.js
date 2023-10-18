@@ -113,7 +113,7 @@ const UpdateReport = () => {
         <div className="items-center justify-center h-14 w-full my-4 space-x-4 pt-4">
           <button
             onClick={updateReport}
-            className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6"
+            className="rounded text-white font-semibold bg-blue-400 hover:bg-blue-700 py-2 px-6"
           >
             Update
           </button>

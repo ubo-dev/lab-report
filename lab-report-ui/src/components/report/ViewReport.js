@@ -2,6 +2,7 @@ import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReportService from "../../services/ReportService";
+import LaborantService from "../../services/LaborantService";
 
 export default function ViewReport() {
   const { id } = useParams();
@@ -13,15 +14,16 @@ export default function ViewReport() {
     identityNumber: "",
     diagnosis: "",
     diagnosisDetails: "",
-    documentPhoto: ""
+    documentPhoto: "",
+    laborantId: "",
   });
-
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await ReportService.getReportById(report.id);
+        console.log(response.data.laborantId)
         setReport(response.data);
-        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -33,11 +35,9 @@ export default function ViewReport() {
       <div className="px-4 sm:px-0">
         <button
           onClick={() => navigate("/report/all")}
-          className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+          className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
         >
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-700 rounded-md group-hover:bg-opacity-0">
-            Back To Home{" "}
-          </span>
+          Back To Home{" "}
         </button>
         <h3 className="text-base font-semibold leading-7 text-gray-900">
           Report Information
@@ -98,6 +98,13 @@ export default function ViewReport() {
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
+              Laborant
+            </dt>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+            </dd>
+          </div>
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm font-medium leading-6 text-gray-900">
               Document Photo
             </dt>
             <dd className="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -112,17 +119,14 @@ export default function ViewReport() {
                       aria-hidden="true"
                     />
                     <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                      <span className="truncate font-medium">
-                        {report.documentPhoto}
+                      <span className="truncate font-medium">{}</span>
+                      <span className="flex-shrink-0 text-gray-400">
+                        document photo
                       </span>
-                      <span className="flex-shrink-0 text-gray-400">document photo</span>
                     </div>
                   </div>
                   <div className="ml-4 flex-shrink-0">
-                    <a
-                      href="#"
-                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                    >
+                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
                       Download
                     </a>
                   </div>

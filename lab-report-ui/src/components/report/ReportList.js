@@ -12,6 +12,15 @@ const ReportList = () => {
   const [navAdd, setNavAdd] = useState(false);
 
   useEffect(() => {
+    if (navLaborant) {
+      navigate("/laborant/all");
+    }
+
+    if (navAdd) {
+      navigate("/report/add");
+    }
+    setNavLaborant(false);
+    setNavAdd(false);
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -23,7 +32,7 @@ const ReportList = () => {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [navLaborant, navAdd, navigate]);
 
   const deleteReport = (e, id) => {
     e.preventDefault();
@@ -33,7 +42,6 @@ const ReportList = () => {
   const sortReportsByDate = (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("aloo");
     ReportService.getReportsOrderedByDate().then((response) => {
       try {
         setReport(response.data);
@@ -45,61 +53,35 @@ const ReportList = () => {
     console.log(ReportService.getReportsOrderedByDate());
   };
 
-  useEffect( () => {
-    if(navLaborant) {
-        navigate("/laborant/all")
-    }
-
-    if(navAdd) {
-      navigate("/report/add")
-    }
-    setNavLaborant(false);
-    setNavAdd(false);
-
-  })
-
-  const handleNavigate = () => {
-    setNavLaborant(true);
-  };
-
-  const handleNavigateAdd = () => {
-    setNavAdd(true);
-  };
-
   return (
     <div className="container mx-auto my-4">
       <div className="flex justify-between">
         <div className="h-12">
           <button
-            onClick={handleNavigateAdd}
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+            onClick={setNavAdd}
+            className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-700 rounded-md group-hover:bg-opacity-0">
-              Add Report{" "}
-            </span>
+            Add Report{" "}
           </button>
         </div>
         <div className="h-12">
           <button
-            onClick={handleNavigate}
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+            onClick={setNavLaborant}
+            className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-700 rounded-md group-hover:bg-opacity-0">
-              Laborants{" "}
-            </span>
+            Laborants{" "}
           </button>
         </div>
         <div className="h-12">
           <button
             onClick={sortReportsByDate}
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+            className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-700 rounded-md group-hover:bg-opacity-0">
-              Sort By Date{" "}
-            </span>
+            Sort By Date{" "}
           </button>
         </div>
       </div>
+
       <div className="flex shadow border-b mt-3">
         <table className="min-w-full">
           <thead className="bg-gray-50">
@@ -124,7 +106,8 @@ const ReportList = () => {
               </th>
             </tr>
           </thead>
-          {!loading && (
+
+          {report && !loading ? (
             <tbody className="bg-white">
               {report.map((report) => (
                 <Report
@@ -134,6 +117,8 @@ const ReportList = () => {
                 ></Report>
               ))}
             </tbody>
+          ) : (
+            <p>No reports to display.</p>
           )}
         </table>
       </div>

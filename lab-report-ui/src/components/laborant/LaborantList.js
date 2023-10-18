@@ -9,10 +9,19 @@ const LaborantList = () => {
   const [loading, setLoading] = useState(true);
   const [laborant, setLaborant] = useState(null);
   const [nav, setNav] = useState(false);
+  const [addLab, setAddLab] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (nav) {
+        navigate("/report/all");
+      }
+      if (addLab) {
+        navigate("/laborant/add")
+      }
+      setNav(false);
       setLoading(true);
+      setAddLab(false);
       try {
         const response = await LaborantService.getLaborants();
         setLaborant(response.data);
@@ -23,30 +32,23 @@ const LaborantList = () => {
     };
 
     fetchData();
-  }, []);
-
-  useEffect( () => {
-    if(nav) {
-        navigate("/report/all")
-    }
-    setNav(false);
-  })
-
-  const handleNavigate = () => {
-    setNav(true);
-  };
+  }, [nav, navigate,addLab]);
 
   return (
     <div className="container mx-auto my-4">
       <div className="flex justify-between">
         <div className="h-12">
           <button
-            onClick={handleNavigate}
-            className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+            onClick={setNav}
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
-            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-700 rounded-md group-hover:bg-opacity-0">
-              Reports{" "}
-            </span>
+            Reports{" "}
+          </button>
+          <button
+            onClick={setAddLab}
+            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          >
+            Add Laborant{" "}
           </button>
         </div>
       </div>
@@ -68,12 +70,14 @@ const LaborantList = () => {
               </th>
             </tr>
           </thead>
-          {!loading && (
+          {laborant && !loading ? (
             <tbody className="bg-white">
               {laborant.map((laborant) => (
                 <Laborant laborant={laborant} key={laborant.id}></Laborant>
               ))}
             </tbody>
+          ) : (
+            <p> No laborants to display.</p>
           )}
         </table>
       </div>

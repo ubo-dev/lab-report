@@ -33,21 +33,21 @@ const Report = ({ report, deleteReport }) => {
       <a
           href="/"
           onClick={(e, id) => viewReport(e, report.id)}
-          className="text-indigo-600 hover:text-indigo-800 px-4 hover:cursor-pointer"
+          className="text-blue-600 hover:text-blue-800 px-4 hover:cursor-pointer"
         >
           View
         </a>
         <a
           href="/"
           onClick={(e, id) => editReport(e, report.id)}
-          className="text-indigo-600 hover:text-indigo-800 px-4 hover:cursor-pointer"
+          className="text-blue-600 hover:text-blue-800 px-4 hover:cursor-pointer"
         >
           Edit
         </a>
         <a
           href="/"
           onClick={(e, id) => deleteReport(e, report.id)}
-          className="text-indigo-600 hover:text-indigo-800 hover:cursor-pointer"
+          className="text-red-600 hover:text-red-800 hover:cursor-pointer"
         >
           Delete
         </a>
