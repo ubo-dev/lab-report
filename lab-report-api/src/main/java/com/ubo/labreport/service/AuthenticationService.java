@@ -1,6 +1,9 @@
-package com.ubo.labreport.security;
+package com.ubo.labreport.service;
 
-import com.ubo.labreport.config.JwtService;
+import com.ubo.labreport.security.JwtService;
+import com.ubo.labreport.dto.AuthenticationRequest;
+import com.ubo.labreport.dto.AuthenticationResponse;
+import com.ubo.labreport.dto.RegisterRequest;
 import com.ubo.labreport.model.User;
 import com.ubo.labreport.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,9 +40,7 @@ public class AuthenticationService {
         );
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
-        return new AuthenticationResponse(
-                jwtToken
-        );
+        return new AuthenticationResponse(jwtToken);
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -50,8 +51,7 @@ public class AuthenticationService {
                 )
         );
 
-        var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
 
         var jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(

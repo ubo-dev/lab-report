@@ -1,5 +1,9 @@
-package com.ubo.labreport.security;
+package com.ubo.labreport.controller;
 
+import com.ubo.labreport.dto.AuthenticationRequest;
+import com.ubo.labreport.dto.AuthenticationResponse;
+import com.ubo.labreport.dto.RegisterRequest;
+import com.ubo.labreport.service.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

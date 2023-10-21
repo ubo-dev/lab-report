@@ -1,4 +1,4 @@
-package com.ubo.labreport.security;
+package com.ubo.labreport.dto;
 
 public class AuthenticationRequest {
     private String email;

@@ -1,4 +1,4 @@
-package com.ubo.labreport.security;
+package com.ubo.labreport.dto;
 
 import com.ubo.labreport.enums.Role;
 import jakarta.validation.constraints.NotBlank;
