@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/auth")
-@CrossOrigin(origins = "*",originPatterns = "*/*", allowedHeaders = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;

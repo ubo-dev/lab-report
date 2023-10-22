@@ -11,6 +11,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
+import static com.ubo.labreport.enums.Role.ADMIN;
+import static com.ubo.labreport.enums.Role.USER;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -28,15 +31,14 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req
-                                .requestMatchers("/api/auth").permitAll()
-                                .requestMatchers("/api/**").hasAnyRole("ADMIN", "USER")
+                        req.requestMatchers("/v1/auth/**")
+                                .permitAll()
+                                .requestMatchers("/v1/**").hasAnyRole(ADMIN.name(),USER.name())
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 }
