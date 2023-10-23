@@ -3,10 +3,10 @@ ___
 ### Spring Boot and ReactJS Application
 
 ---
-This project provides to reach listing of existing reports or creating and editing new ones if you are authorized as laborant. 
+This project provides to reach listing of existing reports or creating and editing new ones if you are authorized as admin. 
 
 ### Summary
-The assessment consists of an API to be used for creating a new lab report as laborant or to keep track of their detailed reports as standart user.  
+The assessment consists of an API to be used for creating a new lab report as admin or to keep track of their detailed reports as standart user.  
 
 #### Requirements
 
