@@ -22,7 +22,6 @@ public class ReportController {
 
     @PostMapping()
     public ResponseEntity<ReportDto> createReport(@RequestBody @Valid ReportRequest request) {
-        System.out.println(request);
         return ResponseEntity.ok(reportService.createReport(request));
     }
 

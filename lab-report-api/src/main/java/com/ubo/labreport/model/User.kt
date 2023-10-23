@@ -1,10 +1,7 @@
 package com.ubo.labreport.model
 
 import com.ubo.labreport.enums.Role
-import jakarta.persistence.Entity
-import jakarta.persistence.Enumerated
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.Id
+import jakarta.persistence.*
 import jakarta.validation.constraints.NotBlank
 import org.hibernate.annotations.GenericGenerator
 import org.jetbrains.annotations.NotNull
@@ -24,17 +21,22 @@ data class User(
     val email: String,
     private val password: String,
 
-    @Enumerated
-    val role: Role
+    @Enumerated(EnumType.STRING)
+    val role: Role,
+
+    @OneToMany(mappedBy = "user")
+    val tokens: List<Token>?
 
 ) : UserDetails {
-    constructor(firstName: String, lastName: String, email: String, password: String,role: Role) : this(
+    constructor(firstName: String, lastName: String, email: String, password: String,
+                role: Role, tokens: List<Token>?) : this(
         "",
         firstName = firstName,
         lastName = lastName,
         email = email,
         password = password,
-        role = role
+        role = role,
+        tokens = tokens
     ) {
 
     }

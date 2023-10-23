@@ -1,5 +1,7 @@
 package com.ubo.labreport.service;
 
+import com.ubo.labreport.enums.TokenType;
+import com.ubo.labreport.model.Token;
 import com.ubo.labreport.security.JwtService;
 import com.ubo.labreport.dto.AuthenticationRequest;
 import com.ubo.labreport.dto.AuthenticationResponse;
@@ -19,14 +21,17 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    private final TokenService tokenService;
     public AuthenticationService(UserRepository userRepository,
                                  PasswordEncoder passwordEncoder,
                                  JwtService jwtService,
-                                 AuthenticationManager authenticationManager) {
+                                 AuthenticationManager authenticationManager,
+                                 TokenService tokenService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
+        this.tokenService = tokenService;
     }
 
 
@@ -36,10 +41,13 @@ public class AuthenticationService {
                 request.getLastName(),
                 request.getEmail(),
                 passwordEncoder.encode(request.getPassword()),
-                request.getRole()
+                request.getRole(),
+                null
         );
         userRepository.save(user);
+        revokeAllTokensByUser(user);
         var jwtToken = jwtService.generateToken(user);
+        saveUserToken(user, jwtToken);
         return new AuthenticationResponse(jwtToken);
     }
 
@@ -52,10 +60,35 @@ public class AuthenticationService {
         );
 
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-
+        revokeAllTokensByUser(user);
         var jwtToken = jwtService.generateToken(user);
+        saveUserToken(user,jwtToken);
         return new AuthenticationResponse(
                 jwtToken
         );
+    }
+
+    private void saveUserToken(User user, String jwtToken) {
+        var token = new Token(
+                jwtToken,
+                TokenType.BEARER,
+                false,
+                false,
+                user
+        );
+        tokenService.saveToken(token);
+    }
+
+    private void revokeAllTokensByUser(User user) {
+        var validUserTokens = tokenService.findAllValidTokensByUser(user);
+        if (validUserTokens.isEmpty())
+            return;
+
+        validUserTokens.forEach( token -> {
+                token.setRevoked(true);
+                token.setExpired(true);
+            }
+        );
+        tokenService.saveAll(validUserTokens);
     }
 }

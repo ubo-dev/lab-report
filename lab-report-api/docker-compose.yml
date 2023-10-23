@@ -6,10 +6,10 @@ services:
     command: --authentication_policy=caching_sha2_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ubo11361
-      MYSQL_DATABASE: labreport
-      MYSQL_USER: ubovic
-      MYSQL_PASSWORD: ubovic11361
+      MYSQL_ROOT_PASSWORD: passwd1
+      MYSQL_DATABASE: labreport-mysql
+      MYSQL_USER: test-user
+      MYSQL_PASSWORD: userpasswd1
     ports:
       - "3306:3306"
 

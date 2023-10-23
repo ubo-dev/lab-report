@@ -9,7 +9,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
   datasource:
-    url: jdbc:mysql://localhost:3306/labreport
-    username: ubovic
-    password: ubovic11361
+    url: jdbc:mysql://localhost:3306/labreport-mysql
+    username: test-user
+    password: userpasswd1
     driver-class-name: com.mysql.cj.jdbc.Driver
