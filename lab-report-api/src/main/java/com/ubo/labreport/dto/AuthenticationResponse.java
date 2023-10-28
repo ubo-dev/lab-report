@@ -1,14 +1,23 @@
 package com.ubo.labreport.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AuthenticationResponse {
 
-    private String token;
+    @JsonProperty("access_token")
+    private String accessToken;
 
-    public AuthenticationResponse(String jwtToken) {
-        this.token = jwtToken;
+    @JsonProperty("refresh_token")
+    private String refreshToken;
+
+    public AuthenticationResponse(String jwtToken, String refreshToken) {
+        this.accessToken = jwtToken;
+        this.refreshToken = refreshToken;
     }
 
-    public String getToken() {
-        return token;
+    public String getAccessToken() {
+        return accessToken;
     }
+
+    public String getRefreshToken() {return refreshToken;}
 }

@@ -13,3 +13,12 @@ spring:
     username: test-user
     password: userpasswd1
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+application:
+  security:
+    jwt:
+      secret-key: 4709eb8a38661ceed48f0ebafe4c562d687e14c4a4beccaf5119adc4abe6e6cf
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
+

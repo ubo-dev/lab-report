@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/report")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/v1/api/report")
 public class ReportController {
 
     private final ReportService reportService;

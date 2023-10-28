@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/laborant")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/v1/laborant")
 public class LaborantController {
 
     private final LaborantService laborantService;

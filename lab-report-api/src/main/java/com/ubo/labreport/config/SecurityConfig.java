@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import static com.ubo.labreport.enums.Role.ADMIN;
 import static com.ubo.labreport.enums.Role.USER;
@@ -18,6 +19,19 @@ import static com.ubo.labreport.enums.Role.USER;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private static final String[] WHITE_LIST_URL = {
+            "/api/v1/auth/**",
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui/**",
+            "/webjars/**",
+            "/swagger-ui.html"};
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
@@ -34,18 +48,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/v1/auth/**")
+                        req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                                .requestMatchers("/v1/**").hasAnyRole(ADMIN.name(),USER.name())
+                                .requestMatchers("/api/v1/report").hasAnyRole(ADMIN.name(),USER.name())
+                                .requestMatchers("/api/v1/laborant").hasAnyRole(ADMIN.name(),USER.name())
+                                .requestMatchers("/api/v1/demo-controller").hasAnyRole(ADMIN.name(),USER.name())
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout ->
-                        logout.logoutUrl("/v1/auth/logout")
+                        logout.logoutUrl("/api/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((
                                         (request, response, authentication) -> SecurityContextHolder.clearContext()

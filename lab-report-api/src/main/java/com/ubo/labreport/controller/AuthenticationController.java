@@ -4,13 +4,16 @@ import com.ubo.labreport.dto.AuthenticationRequest;
 import com.ubo.labreport.dto.AuthenticationResponse;
 import com.ubo.labreport.dto.RegisterRequest;
 import com.ubo.labreport.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
-@RequestMapping("/v1/auth")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/api/v1/auth")
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
@@ -31,6 +34,14 @@ public class AuthenticationController {
             @RequestBody AuthenticationRequest request
             ) {
         return ResponseEntity.ok(authenticationService.authenticate(request));
+    }
+
+    @PostMapping("/refresh-token")
+    public void refreshToken(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        authenticationService.refreshToken(request,response);
     }
 
 }
