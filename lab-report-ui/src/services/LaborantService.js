@@ -1,34 +1,33 @@
 import axios from "axios";
 
-const REPORT_BASE_URL = "//localhost:8080/v1/laborant";
+const REPORT_BASE_URL = "http://localhost:8080/api/laborant";
 
-const token =  localStorage.getItem("token");
+const access_token =  localStorage.getItem("access_token");
 
 const LaborantService = {
   saveLaborant(laborant) {
-    console.log(token)
+    console.log(access_token)
     return axios({
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${access_token}`,
       },
       method: "post",
-      url: REPORT_BASE_URL,
+      url: REPORT_BASE_URL + "/createLaborant",
       data: {
         firstName: laborant.firstName,
         lastName: laborant.lastName,
-        hospitalId: laborant.hospitalId,
-        reports: laborant.reports,
+        hospitalId: laborant.hospitalId
       },
     });
   },
   getLaborants() {
-    console.log(token)
+    console.log(access_token)
     return axios({
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${access_token}`,
       },
       method: "get",
-      url: REPORT_BASE_URL,
+      url: REPORT_BASE_URL + "/getAllLaborant",
       responseType: "json",
     });
   },
@@ -36,10 +35,10 @@ const LaborantService = {
     console.log(id)
     return axios({
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${access_token}`,
       },
       method: "get",
-      url: REPORT_BASE_URL + `/${id}`,
+      url: REPORT_BASE_URL + `/getLaborantById/${id}`,
     });
   },
 };

@@ -28,13 +28,15 @@ export default function RegisterPage() {
     UserService.saveUser(user)
       .then((response) => {
         //get token from response
-        const token = response.data.token;
-
+        const access_token = response.data.access_token;
+        const refresh_token = response.data.refresh_token;
         //set JWT token to local
-        localStorage.setItem("token", token);
+        localStorage.setItem("access_token", access_token);
+        localStorage.setItem("refresh_token", refresh_token);
+        debugger
 
         //redirect user to home page
-        window.location.href = "/report/all";
+        window.location.href = "/laborant/all";
       })
       .catch((err) => console.log(err));
   };

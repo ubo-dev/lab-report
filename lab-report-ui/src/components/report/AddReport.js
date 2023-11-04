@@ -4,15 +4,14 @@ import ReportService from "../../services/ReportService";
 
 const AddReport = () => {
   const [listNav, setListNav] = useState(false);
-  const token =  localStorage.getItem("token");
-
+  const access_token =  localStorage.getItem("access_token");
   const [report, setReport] = useState({
     patientFirstName: "",
     patientLastName: "",
     identityNumber: "",
     diagnosis: "",
     diagnosisDetails: "",
-    laborantId:""
+    laborantId: ""
   });
 
   const navigate = useNavigate();
@@ -22,10 +21,10 @@ const AddReport = () => {
     setReport({ ...report, [e.target.name]: value });
   };
 
+
   const saveReport = (e) => {
     e.preventDefault();
-    console.log(report);
-    console.log(token);
+    console.log(access_token);
     ReportService.saveReport(report)
       .then((response) => {
         console.log(response.data);
@@ -45,7 +44,7 @@ const AddReport = () => {
       identityNumber: "",
       diagnosis: "",
       diagnosisDetails: "",
-      laborantId:""
+      laborantId: ""
     });
   };
 

@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const REGISTER_URL = "//localhost:8080/v1/auth/register";
-const LOGIN_URL = "//localhost:8080/v1/auth/authenticate";
+const REGISTER_URL = "http://localhost:8080/api/auth/register";
+const LOGIN_URL = "http://localhost:8080/api/auth/login";
+const REFRESH_URL = "http://localhost:8080/api/auth/refresh-token"
 
 const UserService = {
   saveUser(user) {
@@ -25,6 +26,15 @@ const UserService = {
             email: userCredentials.email,
             password: userCredentials.password
         }
+    })
+  },
+  refreshToken(access_token) {
+    return axios({
+      method: "post",
+      url: REFRESH_URL,
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      }
     })
   }
 };

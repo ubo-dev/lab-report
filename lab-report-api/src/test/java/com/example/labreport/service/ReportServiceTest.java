@@ -6,6 +6,7 @@ import com.ubo.labreport.exception.ReportNotFoundException;
 import com.ubo.labreport.model.Laborant;
 import com.ubo.labreport.model.Report;
 import com.ubo.labreport.repository.ReportRepository;
+import com.ubo.labreport.service.LaborantService;
 import com.ubo.labreport.service.ReportService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,13 +26,15 @@ public class ReportServiceTest {
     private ReportService reportService;
     private ReportRepository reportRepository;
     private ReportDtoConverter reportDtoConverter;
+    private LaborantService laborantService;
 
 
     @BeforeEach
     public void setUp() {
         reportRepository = mock(ReportRepository.class);
         reportDtoConverter = mock(ReportDtoConverter.class);
-        reportService = new ReportService(reportRepository,reportDtoConverter);
+        laborantService = mock(LaborantService.class);
+        reportService = new ReportService(reportRepository,reportDtoConverter,laborantService);
     }
 
     @Test

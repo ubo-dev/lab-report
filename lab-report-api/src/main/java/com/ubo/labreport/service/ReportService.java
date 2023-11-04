@@ -1,5 +1,6 @@
 package com.ubo.labreport.service;
 
+import com.ubo.labreport.dto.LaborantDto;
 import com.ubo.labreport.dto.ReportDto;
 import com.ubo.labreport.dto.ReportRequest;
 import com.ubo.labreport.dto.converter.LaborantDtoConverter;
@@ -22,9 +23,11 @@ public class ReportService {
 
     private final ReportRepository reportRepository;
     private final ReportDtoConverter converter;
-
+    private final LaborantService laborantService;
 
     public ReportDto createReport(ReportRequest request) {
+        LaborantDto laborant = laborantService.getLaborantById(request.laborantId());
+
         return converter.convert(
                 reportRepository.save(
                         Report.builder()
@@ -34,6 +37,13 @@ public class ReportService {
                                 .diagnosis(request.diagnosis())
                                 .diagnosisDetails(request.diagnosisDetails())
                                 .givenDate(LocalDateTime.now())
+                                .laborant(
+                                        Laborant.builder()
+                                                .firstName(laborant.firstName())
+                                                .lastName(laborant.lastName())
+                                                .hospitalId(laborant.hospitalId())
+                                                .build()
+                                )
                                 .build()
                 )
         );

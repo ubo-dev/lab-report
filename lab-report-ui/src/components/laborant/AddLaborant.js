@@ -4,13 +4,12 @@ import LaborantService from "../../services/LaborantService";
 
 const AddLaborant = () => {
   const [listNav, setListNav] = useState(false);
-  const token = localStorage.getItem("token");
-
+  const token = localStorage.getItem("access_token");
+  console.log(token)
   const [laborant, setLaborant] = useState({
     firstName: "",
     lastName: "",
-    hospitalId: "",
-    reports: "",
+    hospitalId: ""
   });
 
   const navigate = useNavigate();
@@ -22,8 +21,6 @@ const AddLaborant = () => {
 
   const saveLaborant = (e) => {
     e.preventDefault();
-    console.log(laborant);
-    console.log(token);
     LaborantService.saveLaborant(laborant)
       .then((response) => {
         console.log(response.data);
@@ -101,19 +98,6 @@ const AddLaborant = () => {
               type="text"
               name="hospitalId"
               value={laborant.hospitalId}
-              onChange={(e) => handleChange(e)}
-              className="h10 w-96 border mt-2 px-2 py-2"
-            ></input>{" "}
-          </div>
-          <div className="items-center justify-center h-14 w-full my-4">
-            <label className="block text-gray-600 text-sm font-normal">
-              {" "}
-              Reports{" "}
-            </label>
-            <input
-              type="text"
-              name="reports"
-              value={laborant.reports}
               onChange={(e) => handleChange(e)}
               className="h10 w-96 border mt-2 px-2 py-2"
             ></input>{" "}

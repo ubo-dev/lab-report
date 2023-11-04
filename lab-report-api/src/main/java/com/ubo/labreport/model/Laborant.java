@@ -3,7 +3,6 @@ package com.ubo.labreport.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 import java.util.UUID;
