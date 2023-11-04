@@ -3,19 +3,17 @@ package com.ubo.labreport.service;
 import com.ubo.labreport.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class LogoutService implements LogoutHandler {
 
-    private final TokenService tokenService;
-
-    public LogoutService(TokenService tokenRepository) {
-        this.tokenService = tokenRepository;
-    }
+    private final TokenRepository tokenRepository;
 
 
     @Override
@@ -26,12 +24,12 @@ public class LogoutService implements LogoutHandler {
             return;
         }
         jwt = authHeader.substring(7);
-        var storedToken = tokenService.findByToken(jwt)
+        var storedToken = tokenRepository.findByToken(jwt)
                 .orElse(null);
         if (storedToken != null) {
             storedToken.setExpired(true);
             storedToken.setRevoked(true);
-            tokenService.saveToken(storedToken);
+            tokenRepository.save(storedToken);
             SecurityContextHolder.clearContext();
         }
     }

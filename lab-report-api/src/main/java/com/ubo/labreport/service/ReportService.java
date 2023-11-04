@@ -8,69 +8,67 @@ import com.ubo.labreport.exception.ReportNotFoundException;
 import com.ubo.labreport.model.Laborant;
 import com.ubo.labreport.model.Report;
 import com.ubo.labreport.repository.ReportRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class ReportService {
 
     private final ReportRepository reportRepository;
     private final ReportDtoConverter converter;
 
-    public ReportService(@Qualifier("report") ReportRepository reportRepository,
-                         ReportDtoConverter reportDtoConverter) {
-        this.reportRepository = reportRepository;
-        this.converter = reportDtoConverter;
-    }
-
 
     public ReportDto createReport(ReportRequest request) {
-        return converter.convert(reportRepository.save(new Report(
-                request.patientFirstName(),
-                request.patientLastName(),
-                request.identityNumber(),
-                request.diagnosis(),
-                request.diagnosisDetails(),
-                new Laborant(
-                        request.laborant().firstName(),
-                        request.laborant().lastName(),
-                        request.laborant().hospitalId()
+        return converter.convert(
+                reportRepository.save(
+                        Report.builder()
+                                .patientFirstName(request.patientFirstName())
+                                .patientLastName(request.patientLastName())
+                                .identityNumber(request.identityNumber())
+                                .diagnosis(request.diagnosis())
+                                .diagnosisDetails(request.diagnosisDetails())
+                                .givenDate(LocalDateTime.now())
+                                .build()
                 )
-        )));
+        );
     }
 
     public List<ReportDto> getAllReport() {
         return converter.convertList(reportRepository.findAll());
     }
 
-    public ReportDto getReportById(String id) {
+    public ReportDto getReportById(UUID id) {
         return converter.convert(findReportById(id));
     }
 
-    protected Report findReportById(String id) {
+    protected Report findReportById(UUID id) {
         return reportRepository.findById(id)
                 .orElseThrow(() -> new ReportNotFoundException("Report not found with id :" + id));
     }
 
-    public ReportDto updateReport(String id, ReportRequest request) {
-        return converter.convert(reportRepository.save(new Report(
-                id,
-                request.patientFirstName(),
-                request.patientLastName(),
-                request.identityNumber(),
-                request.diagnosis(),
-                request.diagnosisDetails(),
-                new Laborant(
-                        request.laborant().firstName(),
-                        request.laborant().lastName(),
-                        request.laborant().hospitalId()
+    public ReportDto updateReport(UUID id, ReportRequest request) {
+        return converter.convert(
+                reportRepository.save(
+                        Report.builder()
+                                .id(id)
+                                .patientFirstName(request.patientFirstName())
+                                .patientLastName(request.patientLastName())
+                                .identityNumber(request.identityNumber())
+                                .diagnosis(request.diagnosis())
+                                .diagnosisDetails(request.diagnosisDetails())
+                                .givenDate(LocalDateTime.now())
+                                .build()
                 )
-        )));
+        );
     }
 
-    public ReportDto deleteReport(String id) {
+    public ReportDto deleteReport(UUID id) {
         Report report = findReportById(id);
         reportRepository.deleteById(id);
 

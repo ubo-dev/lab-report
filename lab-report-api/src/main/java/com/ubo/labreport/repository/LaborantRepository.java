@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 
 @Repository
-@Qualifier("laborant")
-public interface LaborantRepository extends JpaRepository<Laborant, String> {
+public interface LaborantRepository extends JpaRepository<Laborant, UUID> {
 
     Laborant getLaborantByFirstNameAndLastName(String firstName, String lastName);
 }

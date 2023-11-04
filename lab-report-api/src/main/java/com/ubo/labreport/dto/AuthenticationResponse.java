@@ -1,7 +1,13 @@
 package com.ubo.labreport.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class AuthenticationResponse {
 
     @JsonProperty("access_token")
@@ -10,14 +16,4 @@ public class AuthenticationResponse {
     @JsonProperty("refresh_token")
     private String refreshToken;
 
-    public AuthenticationResponse(String jwtToken, String refreshToken) {
-        this.accessToken = jwtToken;
-        this.refreshToken = refreshToken;
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public String getRefreshToken() {return refreshToken;}
 }

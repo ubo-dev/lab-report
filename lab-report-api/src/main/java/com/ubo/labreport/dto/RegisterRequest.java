@@ -2,10 +2,18 @@ package com.ubo.labreport.dto;
 
 import com.ubo.labreport.enums.Role;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegisterRequest {
 
     @NotBlank
@@ -20,21 +28,6 @@ public class RegisterRequest {
     @NotBlank
     private String role;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 
     public Role getRole() {
         if(Objects.equals(this.role, "ADMIN")) {

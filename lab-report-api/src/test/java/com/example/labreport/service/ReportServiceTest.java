@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,45 +36,49 @@ public class ReportServiceTest {
 
     @Test
     public void testFindByReportId_whenReportIdExists_shouldReturnReport() {
-        Report report = new Report("id","patientFirstName","patientLastName","identityNumber"
+        UUID id = UUID.randomUUID();
+        Report report = new Report(id,"patientFirstName","patientLastName","identityNumber"
                 ,"diagnosis","diagnosisDetails", LocalDateTime.now(), new Laborant());
 
-        Mockito.when(reportRepository.findById("id")).thenReturn(Optional.of(report));
+        Mockito.when(reportRepository.findById(id)).thenReturn(Optional.of(report));
 
-        Report result = reportRepository.findById("id").orElseThrow(() -> new ReportNotFoundException("report not found"));
+        Report result = reportRepository.findById(id).orElseThrow(() -> new ReportNotFoundException("report not found"));
 
         assertEquals(result,report);
     }
 
     @Test
     public void testFindByReportId_whenReportIdDoesNotExists_shouldThrowReportNotFound() {
-        Mockito.when(reportRepository.findById("id")).thenReturn(Optional.empty());
-        assertThrows(ReportNotFoundException.class, () -> reportRepository.findById("id").get());
+        UUID id = UUID.randomUUID();
+        Mockito.when(reportRepository.findById(id)).thenReturn(Optional.empty());
+        assertThrows(ReportNotFoundException.class, () -> reportRepository.findById(id).get());
     }
 
     @Test
     public void testGetReportById_whenReportIdExists_shouldReturnReport() {
-        Report report = new Report("id","name","surname"
+        UUID id = UUID.randomUUID();
+        Report report = new Report(id,"name","surname"
                 ,"identity number","diagnosis","diagnosis details"
                 ,LocalDateTime.now(), new Laborant());
-        ReportDto reportDto = new ReportDto("id","name","surname"
+        ReportDto reportDto = new ReportDto(id,"name","surname"
                 ,"identity number","diagnosis","diagnosis details"
                 ,LocalDateTime.now());
 
-        Mockito.when(reportRepository.findById("id")).thenReturn(Optional.of(report));
+        Mockito.when(reportRepository.findById(id)).thenReturn(Optional.of(report));
         Mockito.when(reportDtoConverter.convert(report)).thenReturn(reportDto);
 
-        ReportDto result = reportService.getReportById("id");
+        ReportDto result = reportService.getReportById(id);
 
         assertEquals(result,reportDto);
     }
 
     @Test
     public void testGetReportById_whenReportIdDoesNotExists_shouldThrowReportNotFoundException() {
+        UUID id = UUID.randomUUID();
 
-        Mockito.when(reportRepository.findById("id")).thenReturn(Optional.empty());
+        Mockito.when(reportRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(ReportNotFoundException.class, () -> reportRepository.findById("id"));
+        assertThrows(ReportNotFoundException.class, () -> reportRepository.findById(id));
 
         Mockito.verifyNoInteractions(reportDtoConverter);
     }
