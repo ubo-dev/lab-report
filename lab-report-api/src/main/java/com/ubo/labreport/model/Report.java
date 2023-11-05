@@ -2,7 +2,6 @@ package com.ubo.labreport.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -25,7 +24,7 @@ public class Report {
     private String diagnosisDetails;
     private LocalDateTime givenDate;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "laborant_id", nullable = false)
     private Laborant laborant;
 }

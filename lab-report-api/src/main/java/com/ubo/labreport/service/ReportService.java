@@ -26,6 +26,7 @@ public class ReportService {
     private final LaborantService laborantService;
 
     public ReportDto createReport(ReportRequest request) {
+
         LaborantDto laborant = laborantService.getLaborantById(request.laborantId());
 
         return converter.convert(
@@ -37,13 +38,13 @@ public class ReportService {
                                 .diagnosis(request.diagnosis())
                                 .diagnosisDetails(request.diagnosisDetails())
                                 .givenDate(LocalDateTime.now())
-                                .laborant(
-                                        Laborant.builder()
-                                                .firstName(laborant.firstName())
-                                                .lastName(laborant.lastName())
-                                                .hospitalId(laborant.hospitalId())
-                                                .build()
-                                )
+                                .laborant(Laborant.builder()
+                                        .id(laborant.id())
+                                        .firstName(laborant.firstName())
+                                        .lastName(laborant.lastName())
+                                        .hospitalId(laborant.hospitalId())
+                                        .reports(laborant.reports())
+                                        .build())
                                 .build()
                 )
         );

@@ -21,6 +21,7 @@ export default function App() {
           <Route path="/register" element={<RegisterPage />}></Route>
           <Route path="/report/all" element={<ReportList />}></Route>
           <Route path="/report/add" element={<AddReport />}></Route>
+          <Route path="/report/add/:id" element={<AddReport />}></Route>
           <Route path="/report/update/:id" element={<UpdateReport />}></Route>
           <Route path="/report/view/:id" element={<ViewReport />}></Route>
           <Route path="/laborant/all" element={<LaborantList />}></Route>

@@ -8,6 +8,11 @@ const Laborant = ({ laborant }) => {
     navigate(`/laborant/view/${id}`)
   }
 
+  const addReportForLaborant = (e, id) => {
+    e.preventDefault();
+    navigate(`/report/add/${id}`);
+  }
+
   return (
     <tr key={laborant.id}>
       <td className="text-left px-6 py-4 whitespace-nowrap">
@@ -26,6 +31,13 @@ const Laborant = ({ laborant }) => {
           className="text-indigo-600 hover:text-indigo-800 px-4 hover:cursor-pointer"
         >
           View
+        </a>
+        <a
+          href="/"
+          onClick={(e, id) => addReportForLaborant(e, laborant.id)}
+          className="text-indigo-600 hover:text-indigo-800 px-4 hover:cursor-pointer"
+        >
+          Create Report 
         </a>
       </td>
     </tr>

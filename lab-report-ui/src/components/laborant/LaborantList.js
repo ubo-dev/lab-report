@@ -24,6 +24,7 @@ const LaborantList = () => {
       setAddLab(false);
       try {
         const response = await LaborantService.getLaborants();
+        debugger
         setLaborant(response.data);
       } catch (error) {
         console.log(error);

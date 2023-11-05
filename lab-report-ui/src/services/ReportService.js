@@ -3,9 +3,11 @@ import axios from "axios";
 const REPORT_BASE_URL = "http://localhost:8080/api/report";
 const access_token = localStorage.getItem("access_token");
 
+
+
 const ReportService = {
   saveReport(report) {
-    console.log(report.laborantId)
+    debugger
 
     return axios({
       headers: {

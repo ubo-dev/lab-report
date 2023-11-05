@@ -37,8 +37,7 @@ const AddLaborant = () => {
     setLaborant({
       firstName: "",
       lastName: "",
-      hospitalId: "",
-      reports: "",
+      hospitalId: ""
     });
   };
 

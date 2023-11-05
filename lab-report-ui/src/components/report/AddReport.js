@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReportService from "../../services/ReportService";
 
 const AddReport = () => {
+  const { id } = useParams();
   const [listNav, setListNav] = useState(false);
   const access_token =  localStorage.getItem("access_token");
+
   const [report, setReport] = useState({
     patientFirstName: "",
     patientLastName: "",
     identityNumber: "",
     diagnosis: "",
     diagnosisDetails: "",
-    laborantId: ""
+    laborantId: id
   });
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {

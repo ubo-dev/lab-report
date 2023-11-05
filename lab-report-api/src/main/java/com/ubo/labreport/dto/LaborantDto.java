@@ -1,5 +1,6 @@
 package com.ubo.labreport.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ubo.labreport.model.Report;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public record LaborantDto(
         String firstName,
         String lastName,
         String hospitalId,
+        @JsonIgnore
         List<Report> reports
 ) {
 }

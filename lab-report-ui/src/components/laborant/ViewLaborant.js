@@ -1,4 +1,3 @@
-import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LaborantService from "../../services/LaborantService";
@@ -10,8 +9,7 @@ export default function ViewLaborant() {
     id: id,
     firstName:"",
     lastName:"",
-    hospitalId:"",
-    reports: []
+    hospitalId:""
   });
 
   useEffect(() => {
@@ -69,16 +67,7 @@ export default function ViewLaborant() {
             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
               {laborant.hospitalId}
             </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Reports
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              {laborant.reports}
-            </dd>
-          </div>
-          
+          </div> 
         </dl>
       </div>
     </div>
