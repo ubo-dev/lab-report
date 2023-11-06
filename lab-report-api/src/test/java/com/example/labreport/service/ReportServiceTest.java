@@ -87,5 +87,34 @@ public class ReportServiceTest {
         Mockito.verifyNoInteractions(reportDtoConverter);
     }
 
+    @Test
+    public void testGetReportByName_whenReportNameExists_shouldReturnReport() {
+        UUID id = UUID.randomUUID();
+        Report report = new Report(id,"name","surname"
+                ,"identity number","diagnosis","diagnosis details"
+                ,LocalDateTime.now(), new Laborant(), new ImageData());
+        ReportDto reportDto = new ReportDto(id,"name","surname"
+                ,"identity number","diagnosis","diagnosis details"
+                ,LocalDateTime.now());
+
+        Mockito.when(reportService.getReportByPatientName(report.getPatientFirstName(), report.getPatientLastName()));
+        Mockito.when(reportDtoConverter.convert(report)).thenReturn(reportDto);
+
+        ReportDto result = reportService.getReportById(id);
+
+        assertEquals(result,reportDto);
+    }
+
+    @Test
+    public void testGetReportByName_whenReportIdDoesNotExists_shouldThrowReportNotFoundException() {
+        UUID id = UUID.randomUUID();
+
+        Mockito.when(reportRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThrows(ReportNotFoundException.class, () -> reportRepository.findById(id));
+
+        Mockito.verifyNoInteractions(reportDtoConverter);
+    }
+
 
 }

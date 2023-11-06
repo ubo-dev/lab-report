@@ -9,6 +9,7 @@ const LaborantList = () => {
   const [loading, setLoading] = useState(true);
   const [laborant, setLaborant] = useState(null);
   const [nav, setNav] = useState(false);
+  const [findLaborantByName, setFindLaborantByName] = useState(false);
   const [addLab, setAddLab] = useState(false);
 
   useEffect(() => {
@@ -17,14 +18,17 @@ const LaborantList = () => {
         navigate("/report/all");
       }
       if (addLab) {
-        navigate("/laborant/add")
+        navigate("/laborant/add");
+      }
+      if (findLaborantByName) {
+        navigate("/laborant/findLaborantByName");
       }
       setNav(false);
       setLoading(true);
       setAddLab(false);
+      setFindLaborantByName(false);
       try {
         const response = await LaborantService.getLaborants();
-        debugger
         setLaborant(response.data);
       } catch (error) {
         console.log(error);
@@ -33,7 +37,7 @@ const LaborantList = () => {
     };
 
     fetchData();
-  }, [nav, navigate,addLab]);
+  }, [nav, navigate, addLab, findLaborantByName]);
 
   return (
     <div className="container mx-auto my-4">
@@ -41,18 +45,29 @@ const LaborantList = () => {
         <div className="h-12">
           <button
             onClick={setNav}
-            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
             Reports{" "}
           </button>
+        </div>
+        <div className="h-12">
           <button
             onClick={setAddLab}
-            className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
             Add Laborant{" "}
           </button>
         </div>
+        <div className="h-12">
+          <button
+            onClick={setFindLaborantByName}
+            className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          >
+            Find Laborant By Name{" "}
+          </button>
+        </div>
       </div>
+
       <div className="flex shadow border-b mt-3">
         <table className="min-w-full">
           <thead className="bg-gray-50">

@@ -74,6 +74,24 @@ const ReportService = {
       url: REPORT_BASE_URL + `/getReportById/${id}`,
     });
   },
+  getReportByName(firstName, lastName) {
+    return axios({
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      method: "get",
+      url: REPORT_BASE_URL + `/getReportByName/${firstName}-${lastName}`,
+    });
+  },
+  getReportByIdentityNumber(identityNumber) {
+    return axios({
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      method: "get",
+      url: REPORT_BASE_URL + `/getReportByIdentityNumber/${identityNumber}`,
+    });
+  },
   updateReport(id, report) {
     return axios({
       headers: {

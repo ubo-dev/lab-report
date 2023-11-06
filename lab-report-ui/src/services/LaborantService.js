@@ -41,6 +41,15 @@ const LaborantService = {
       url: REPORT_BASE_URL + `/getLaborantById/${id}`,
     });
   },
+  getLaborantByName(firstName, lastName) {
+    return axios({
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+      method: "get",
+      url: REPORT_BASE_URL + `/getLaborantByName/${firstName}-${lastName}`,
+    })
+  }
 };
 
 export default LaborantService;

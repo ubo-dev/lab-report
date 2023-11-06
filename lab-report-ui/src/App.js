@@ -9,6 +9,9 @@ import ViewLaborant from "./components/laborant/ViewLaborant";
 import SignInPage from "./pages/SignInPage";
 import RegisterPage from "./pages/RegisterPage";
 import AddLaborant from "./components/laborant/AddLaborant";
+import FindLaborantByName from "./components/laborant/FindLaborantByName";
+import FindReportById from "./components/report/FindReportById";
+import FindReportByName from "./components/report/FindReportByName";
 
 export default function App() {
   return (
@@ -24,8 +27,11 @@ export default function App() {
           <Route path="/report/add/:id" element={<AddReport />}></Route>
           <Route path="/report/update/:id" element={<UpdateReport />}></Route>
           <Route path="/report/view/:id" element={<ViewReport />}></Route>
+          <Route path="/report/findReportByName" element={<FindReportByName />}></Route>
+          <Route path="/report/findReportById" element={<FindReportById />}></Route>
           <Route path="/laborant/all" element={<LaborantList />}></Route>
           <Route path="/laborant/add" element={<AddLaborant />}></Route>
+          <Route path="/laborant/findLaborantByName" element={<FindLaborantByName />}></Route>
           <Route path="/laborant/view/:id" element={<ViewLaborant />}></Route>
         </Routes>
       </BrowserRouter>

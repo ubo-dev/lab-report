@@ -10,17 +10,26 @@ const ReportList = () => {
   const [report, setReport] = useState(null);
   const [navLaborant, setNavLaborant] = useState(false);
   const [navAdd, setNavAdd] = useState(false);
+  const [findReportByName, setFindReportByName] = useState(false);
+  const [findReportById, setFindReportById] = useState(false);
 
   useEffect(() => {
     if (navLaborant) {
       navigate("/laborant/all");
     }
-
     if (navAdd) {
       navigate("/report/add");
     }
+    if (findReportByName) {
+      navigate("/report/findReportByName");
+    }
+    if (findReportById) {
+      navigate("/report/findReportById");
+    }
     setNavLaborant(false);
     setNavAdd(false);
+    setFindReportByName(false);
+    setFindReportById(false);
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -32,7 +41,7 @@ const ReportList = () => {
       setLoading(false);
     };
     fetchData();
-  }, [navLaborant, navAdd, navigate]);
+  }, [navLaborant, navAdd,findReportById,findReportByName, navigate]);
 
   const deleteReport = (e, id) => {
     e.preventDefault();
@@ -70,6 +79,22 @@ const ReportList = () => {
             className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
           >
             Laborants{" "}
+          </button>
+        </div>
+        <div className="h-12">
+          <button
+            onClick={setFindReportById}
+            className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          >
+            Find Report By ID{" "}
+          </button>
+        </div>
+        <div className="h-12">
+          <button
+            onClick={setFindReportByName}
+            className=" bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+          >
+            Find Report By Patient Name{" "}
           </button>
         </div>
         <div className="h-12">
