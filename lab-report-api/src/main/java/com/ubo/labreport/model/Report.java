@@ -27,4 +27,8 @@ public class Report {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "laborant_id", nullable = false)
     private Laborant laborant;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "image_id")
+    private ImageData image;
 }

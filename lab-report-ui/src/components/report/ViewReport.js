@@ -1,10 +1,15 @@
-import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReportService from "../../services/ReportService";
-import LaborantService from "../../services/LaborantService";
+import Pending from "../imageUpload/Pending";
+import Form from "../imageUpload/Form";
+import Uploaded from "../imageUpload/Uploaded";
 
 export default function ViewReport() {
+  const [isPending, setIsPending] = useState(false);
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState(null);
+  const [error, setError] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const [report, setReport] = useState({
@@ -17,12 +22,12 @@ export default function ViewReport() {
     documentPhoto: "",
     laborantId: "",
   });
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await ReportService.getReportById(report.id);
-        console.log(response.data.laborantId)
+        console.log(response.data.laborantId);
         setReport(response.data);
       } catch (error) {
         console.log(error);
@@ -100,8 +105,7 @@ export default function ViewReport() {
             <dt className="text-sm font-medium leading-6 text-gray-900">
               Laborant
             </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-            </dd>
+            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"></dd>
           </div>
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm font-medium leading-6 text-gray-900">
@@ -112,25 +116,25 @@ export default function ViewReport() {
                 role="list"
                 className="divide-y divide-gray-100 rounded-md border border-gray-200"
               >
-                <li className="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                  <div className="flex w-0 flex-1 items-center">
-                    <PaperClipIcon
-                      className="h-5 w-5 flex-shrink-0 text-gray-400"
-                      aria-hidden="true"
+                <div className="w-full h-screen bg-grey flex justify-center items-center">
+                  {error ? (
+                    <p className="text-red-600 text-center border-red-600 rounded-lg border-2 bg-red-300 px-4 py-2">
+                      internal server error , Refresh the page and try again
+                    </p>
+                  ) : isPending ? (
+                    <Pending />
+                  ) : image && url ? (
+                    <Uploaded image={image} url={url} />
+                  ) : (
+                    <Form
+                      image={image}
+                      setImage={setImage}
+                      setIsPending={setIsPending}
+                      setUrl={setUrl}
+                      setError={setError}
                     />
-                    <div className="ml-4 flex min-w-0 flex-1 gap-2">
-                      <span className="truncate font-medium">{}</span>
-                      <span className="flex-shrink-0 text-gray-400">
-                        document photo
-                      </span>
-                    </div>
-                  </div>
-                  <div className="ml-4 flex-shrink-0">
-                    <a className="font-medium text-indigo-600 hover:text-indigo-500">
-                      Download
-                    </a>
-                  </div>
-                </li>
+                  )}
+                </div>
               </ul>
             </dd>
           </div>

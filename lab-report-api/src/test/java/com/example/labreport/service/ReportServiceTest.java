@@ -3,6 +3,7 @@ package com.example.labreport.service;
 import com.ubo.labreport.dto.ReportDto;
 import com.ubo.labreport.dto.converter.ReportDtoConverter;
 import com.ubo.labreport.exception.ReportNotFoundException;
+import com.ubo.labreport.model.ImageData;
 import com.ubo.labreport.model.Laborant;
 import com.ubo.labreport.model.Report;
 import com.ubo.labreport.repository.ReportRepository;
@@ -41,7 +42,7 @@ public class ReportServiceTest {
     public void testFindByReportId_whenReportIdExists_shouldReturnReport() {
         UUID id = UUID.randomUUID();
         Report report = new Report(id,"patientFirstName","patientLastName","identityNumber"
-                ,"diagnosis","diagnosisDetails", LocalDateTime.now(), new Laborant());
+                ,"diagnosis","diagnosisDetails", LocalDateTime.now(), new Laborant(), new ImageData());
 
         Mockito.when(reportRepository.findById(id)).thenReturn(Optional.of(report));
 
@@ -62,7 +63,7 @@ public class ReportServiceTest {
         UUID id = UUID.randomUUID();
         Report report = new Report(id,"name","surname"
                 ,"identity number","diagnosis","diagnosis details"
-                ,LocalDateTime.now(), new Laborant());
+                ,LocalDateTime.now(), new Laborant(), new ImageData());
         ReportDto reportDto = new ReportDto(id,"name","surname"
                 ,"identity number","diagnosis","diagnosis details"
                 ,LocalDateTime.now());
