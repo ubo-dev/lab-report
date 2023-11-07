@@ -15,9 +15,7 @@ The assessment consists of an API to be used for creating a new lab report as ad
 • There will be two types of roles for user;
 
   * ADMIN (can create, delete, read and update reports.)
-  * USER (only can read reports.)
-
-• By initialization, laborants are assigned as ADMIN and users are assigned as USER.
+  * USER (only can read reports and laborant listings.)
 ___
 The application has 3 API's;
 * LaborantAPI
@@ -48,8 +46,6 @@ GET  /api/getImageInfoByName/{name} - get image information by name
 GET  /api/getImageByName/{name} - get image by name
 ```
 
-JUnit test coverage is 100% as well as integration tests are available.
-
 
 ### Tech Stack
 
@@ -64,7 +60,7 @@ JUnit test coverage is 100% as well as integration tests are available.
 - OpenAPI documentation
 - MySQL database on Docker
 - Docker
-- Docker composeused 
+- Docker compose 
 - JUnit 5
 - JWT
 
@@ -98,7 +94,11 @@ ___
 $ cd lab-report/lab-report-api
 $ mvn clean install
 $ mvn spring-boot:run
+```
 
+#### React UI
+
+```ssh
 $ cd lab-report/lab-report-ui
 $ npm install
 $ npm start
