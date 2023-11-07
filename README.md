@@ -46,8 +46,6 @@ GET  /api/getImageInfoByName/{name} - get image information by name
 GET  /api/getImageByName/{name} - get image by name
 ```
 
-JUnit test coverage is 100% as well as integration tests are available.
-
 
 ### Tech Stack
 
