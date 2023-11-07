@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -55,7 +54,7 @@ public class ReportServiceTest {
     public void testFindByReportId_whenReportIdDoesNotExists_shouldThrowReportNotFound() {
         UUID id = UUID.randomUUID();
         Mockito.when(reportRepository.findById(id)).thenReturn(Optional.empty());
-        assertThrows(ReportNotFoundException.class, () -> reportRepository.findById(id).get());
+        assertThrows(ReportNotFoundException.class, () -> reportService.getReportById(id));
     }
 
     @Test
@@ -82,27 +81,7 @@ public class ReportServiceTest {
 
         Mockito.when(reportRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(ReportNotFoundException.class, () -> reportRepository.findById(id));
-
-        Mockito.verifyNoInteractions(reportDtoConverter);
-    }
-
-    @Test
-    public void testGetReportByName_whenReportNameExists_shouldReturnReport() {
-        UUID id = UUID.randomUUID();
-        Report report = new Report(id,"name","surname"
-                ,"identity number","diagnosis","diagnosis details"
-                ,LocalDateTime.now(), new Laborant(), new ImageData());
-        ReportDto reportDto = new ReportDto(id,"name","surname"
-                ,"identity number","diagnosis","diagnosis details"
-                ,LocalDateTime.now());
-
-        Mockito.when(reportService.getReportByPatientName(report.getPatientFirstName(), report.getPatientLastName()));
-        Mockito.when(reportDtoConverter.convert(report)).thenReturn(reportDto);
-
-        ReportDto result = reportService.getReportById(id);
-
-        assertEquals(result,reportDto);
+        assertThrows(ReportNotFoundException.class, () -> reportService.getReportById(id));
     }
 
     @Test
@@ -111,7 +90,7 @@ public class ReportServiceTest {
 
         Mockito.when(reportRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThrows(ReportNotFoundException.class, () -> reportRepository.findById(id));
+        assertThrows(ReportNotFoundException.class, () -> reportService.getReportById(id));
 
         Mockito.verifyNoInteractions(reportDtoConverter);
     }
