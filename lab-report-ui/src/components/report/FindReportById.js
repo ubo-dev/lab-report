@@ -20,8 +20,6 @@ const FindReportById = () => {
 
   const findReportById = (e) => {
     e.preventDefault();
-
-    debugger;
     navigate(`/report/view/${foundReport.id}`);
     // Handle data
   };
@@ -39,7 +37,6 @@ const FindReportById = () => {
         );
         console.log(response.data.laborantId);
         setFoundReport(response.data);
-        debugger;
       } catch (error) {
         console.log(error);
       }

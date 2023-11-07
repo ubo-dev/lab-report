@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const REGISTER_URL = "http://localhost:8080/api/auth/register";
-const LOGIN_URL = "http://localhost:8080/api/auth/login";
-const REFRESH_URL = "http://localhost:8080/api/auth/refresh-token"
+const REGISTER_URL = "http://localhost:6060/api/auth/register";
+const LOGIN_URL = "http://localhost:6060/api/auth/login";
+const REFRESH_URL = "http://localhost:6060/api/auth/refresh-token"
 
 const UserService = {
   saveUser(user) {

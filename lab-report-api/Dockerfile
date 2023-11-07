@@ -1,13 +1,11 @@
-FROM openjdk:17 AS build
-
-COPY pom.xml mvnw ./
-COPY .mvn .mvn
-RUN ./mvnw dependency:resolve
-
-COPY src src
-RUN ./mvnw package
+FROM maven:3.8.3-openjdk-17 AS build
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline
+COPY src/ /app/src/
+RUN mvn package -DskipTests
 
 FROM openjdk:17
-WORKDIR lab-report-api
-COPY --from=build target/*.jar lab-report-api.jar
-ENTRYPOINT ["java", "-jar", "lab-report-api.jar"]
+WORKDIR /app
+COPY --from=build /app/target/lab-report-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]

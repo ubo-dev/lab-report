@@ -1,4 +1,4 @@
-package com.example.labreport;
+package com.ubo.labreport;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

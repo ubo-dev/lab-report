@@ -22,8 +22,6 @@ const FindLaborantByName = () => {
 
   const findLaborantByName = (e) => {
     e.preventDefault();
-
-    debugger;
     navigate(`/laborant/view/${foundLaborant.id}`);
     // Handle data
   };
@@ -41,7 +39,6 @@ const FindLaborantByName = () => {
         );
         console.log(response.data.laborantId);
         setFoundLaborant(response.data);
-        debugger;
       } catch (error) {
         console.log(error);
       }

@@ -1,18 +1,14 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/labreport_db
+    username: postgres
+    password: postgres
   jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
     properties:
       hibernate:
-        format_sql: true
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect
-  datasource:
-    url: jdbc:mysql://localhost:3306/labreport-mysql
-    username: test-user
-    password: userpasswd1
-    driver-class-name: com.mysql.cj.jdbc.Driver
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
 
 application:
   security:

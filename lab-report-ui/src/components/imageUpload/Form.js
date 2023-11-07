@@ -20,7 +20,7 @@ const Form = ({
     formData.append("image", image);
     try {
       const res = await axios({
-        url: "http://localhost:8080/api/image/createImage",
+        url: "http://localhost:6060/api/image/createImage",
         headers: {
           "Content-Type": "multipart/form-data;",
           Authorization: `Bearer ${access_token}`,
@@ -28,15 +28,12 @@ const Form = ({
         method: "post",
         data: formData,
       });
-      debugger;
       if (!res.status === 200) {
         throw Error("Internal Server Error");
       }
       const data = res.config.url;
-      debugger;
       setUrl(data);
       setIsPending(false);
-      debugger;
     } catch (error) {
       console.log(error);
       setIsPending(false);

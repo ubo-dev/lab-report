@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const REPORT_BASE_URL = "http://localhost:8080/api/report";
+const REPORT_BASE_URL = "http://localhost:6060/api/report";
 const access_token = localStorage.getItem("access_token");
 
 

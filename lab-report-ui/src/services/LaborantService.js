@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const REPORT_BASE_URL = "http://localhost:8080/api/laborant";
+const REPORT_BASE_URL = "http://localhost:6060/api/laborant";
 
 const access_token =  localStorage.getItem("access_token");
 

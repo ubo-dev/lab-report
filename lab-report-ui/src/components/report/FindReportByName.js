@@ -21,8 +21,6 @@ const FindReportByName = () => {
 
   const findReportByName = (e) => {
     e.preventDefault();
-
-    debugger;
     navigate(`/report/view/${foundReport.id}`);
     // Handle data
   };
@@ -40,7 +38,6 @@ const FindReportByName = () => {
         );
         console.log(response.data.laborantId);
         setFoundReport(response.data);
-        debugger;
       } catch (error) {
         console.log(error);
       }

@@ -1,22 +1,30 @@
-version: '3.9'
-
+version: '3'
 services:
   db:
-    image: mysql:8.0
-    command: --authentication_policy=caching_sha2_password
+    container_name: postgres_db_labreport
+    image: postgres
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: passwd1
-      MYSQL_DATABASE: lab-report-mysql
-      MYSQL_USER: test-user
-      MYSQL_PASSWORD: userpasswd1
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=labreport_db
+    volumes:
+      - db:/var/lib/postgresql/data
     ports:
-      - "3306:3306"
+      - "5432:5432"
   app:
-    image: 'lab-report-api:latest'
-    build:
-      context: .
-    container_name: lab-report-api
+    container_name: labreport_app
+    build: .
+    restart: always
+    depends_on:
+      - db
     ports:
-      - "9090:8080"
+      - "6060:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/labreport_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+
+volumes:
+  db:
 

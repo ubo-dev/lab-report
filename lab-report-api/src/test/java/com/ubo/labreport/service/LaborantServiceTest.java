@@ -1,4 +1,4 @@
-package com.example.labreport.service;
+package com.ubo.labreport.service;
 
 import com.ubo.labreport.dto.LaborantDto;
 import com.ubo.labreport.dto.converter.LaborantDtoConverter;
