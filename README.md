@@ -103,6 +103,3 @@ $ cd lab-report/lab-report-ui
 $ npm install
 $ npm start
 ```
-
-### Swagger UI will be run on this url
-`http://localhost:${PORT}/swagger-ui.html`
