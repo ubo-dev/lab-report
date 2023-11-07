@@ -23,24 +23,29 @@ The application has 3 API's;
 * LaborantAPI
 * ReportAPI
 * UserAPI
+* ImageAPI
 
 ```html
-POST /v1/auth/register - registration
-POST /v1/auth/authenticate - authentication
+POST /api/auth/register - registration
+POST /api/auth/login - authentication
 
-POST /v1/laborant - creates new laborant
-GET /v1/laborant/{laborantId} - retrieves a laborant by id
-GET /v1/laborant - retrieves all laborants
-GET /v1/laborant/{firstName}-{lastName} - retrieve a laborant by first name and last name
+POST /api/laborant/createLaborant - creates new laborant
+GET /api/laborant/getLaborantId/{laborantId} - retrieves a laborant by id
+GET /api/laborant/getAllLaborant - retrieves all laborants
+GET /api/laborant/getLaborantByName/{firstName}-{lastName} - retrieve a laborant by first name and last name
 
-POST /v1/report - creates new report (must authorized as role admin)
-DELETE /v1/report/{reportId} - to delete a report (must authorized as role admin)
-PUT /v1/report/updateReport/{reportId} - updates existing report (must authorized as role admin)
-GET /v1/report/{report} - retrieves a report by id
-GET /v1/report - retrieves all reports
-GET /v1/report/getAllByDate - retrieves all reports sorted by descending given date time
-GET /v1/report/getReportByIdentityNumber - retrieves report by identity number
-GET /v1/report/{firstName}-{lastName} - retrieve a report by first name and last name of patient
+POST /api/report/createReport - creates new report (must authorized as role admin)
+DELETE /api/report/deleteReportById/{reportId} - to delete a report (must authorized as role admin)
+PUT /api/report/updateReport/{reportId} - updates existing report (must authorized as role admin)
+GET /api/report/getReportById/{reportId} - retrieves a report by id
+GET /api/report/getAllReport - retrieves all reports
+GET /api/report/getAllByDate - retrieves all reports sorted by descending given date time
+GET /api/report/getReportByIdentityNumber - retrieves report by identity number
+GET /api/report/getReportByName/{firstName}-{lastName} - retrieve a report by first name and last name of patient
+
+POST /api/image/createImage - create image
+GET  /api/getImageInfoByName/{name} - get image information by name
+GET  /api/getImageByName/{name} - get image by name
 ```
 
 JUnit test coverage is 100% as well as integration tests are available.
@@ -54,7 +59,7 @@ JUnit test coverage is 100% as well as integration tests are available.
 - Spring Data JPA
 - Spring Security
 - Java Records
-- Kotlin 1.9.0
+- Lombok
 - Restful API
 - OpenAPI documentation
 - MySQL database on Docker
@@ -62,8 +67,6 @@ JUnit test coverage is 100% as well as integration tests are available.
 - Docker composeused 
 - JUnit 5
 - JWT
-
-- I preffered to use Kotlin data classes as my entity classes instead of using Project Lombok to get rid of boilerplate code. Lombok creates unnecessary dependency and create some immutability problems. While Kotlin data classes provides the ability to don't write boilerplate code, it also works full compatible with Java and Spring since its runs on JVM, too. I also used Java Records as DTOs(data transfer objects) to sustain immutability.
 
 ### Prerequisites
 
