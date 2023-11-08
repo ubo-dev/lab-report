@@ -57,8 +57,7 @@ GET  /api/getImageByName/{name} - get image by name
 - Java Records
 - Lombok
 - Restful API
-- OpenAPI documentation
-- MySQL database on Docker
+- PostgreSQL database on Docker
 - Docker
 - Docker compose 
 - JUnit 5
